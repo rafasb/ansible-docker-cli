@@ -1,0 +1,10 @@
+- name: Playbook de pruebas
+  hosts: all
+  become: yes
+  become_user: root
+  
+  tasks:
+
+  - name: Delay shutting down the remote node
+    community.general.shutdown:
+      delay: 60

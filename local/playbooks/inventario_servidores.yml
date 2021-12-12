@@ -1,0 +1,23 @@
+- name: Playbook de pruebas
+  hosts: zotac
+  become: yes
+  become_user: root
+
+  
+  tasks:
+
+  # - name: Información del host
+  #   debug:
+  #     msg: "{{ansible_facts}}"
+  #   register: info
+  
+  - name: Información del host
+    copy:
+      content: "{{ansible_facts | to_nice_yaml(indent=2) | trim | indent(4)}}"
+      dest: /tmp/info.yml
+
+  - name: Guarda la información
+    fetch: 
+      src: "/tmp/info.yml" 
+      dest: tmp
+    

@@ -1,0 +1,35 @@
+- name: Playbook de pruebas
+  hosts: 
+    - zotac
+    - test
+  become: false
+  
+  tasks:
+
+  - name: Información del host
+    debug:
+      msg: "{{ansible_facts}}"
+    register: info
+  
+  - name: Guarda la información
+    blockinfile:
+      path: "./resultados/DatosInventario.yml"
+      create: yes
+      mode: u=rw,g=r
+      block: |2
+        equipos:
+        {% for host in play_hosts %}{% set node = hostvars[host] %}
+          {{ host }}:
+            {{node | to_nice_yaml(indent=2) | trim | indent(4) }}
+
+        {%endfor%}
+    delegate_to: localhost
+
+  - name: Repara permisos
+    file: 
+      dest: "./resultados" 
+      owner: "ansible" 
+      group: "ansible" 
+      mode: "u=rwX,g=rwX,o=rwX"
+      recurse: yes
+    delegate_to: localhost
