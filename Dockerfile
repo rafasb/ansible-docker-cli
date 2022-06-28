@@ -2,7 +2,7 @@ FROM ubuntu:latest
 LABEL MANTAINER="Rafael Santisteban"
 
 RUN apt-get update 
-RUN apt-get -y install python3 python3-pip python3.8-venv sshpass sudo
+RUN apt-get -y install python3 python3-pip python3-venv sshpass sudo
 RUN apt-get -y --fix-missing install git
 RUN pip3 install --upgrade pip
 RUN useradd -m ansible
