@@ -7,6 +7,7 @@ Permite emplear la potente herramienta de Ansible, con una colección de plugins
 Esta solución nos permite crear una imagen personalizada para poder emplear ansible, los plugins e incluso inventarios y variables personalizados.
 
 Los datos de partida del contenedor se ubican en el directorio `build-config` en el que tenemos la siguiente estructura:
+
 directorio | fichero  | uso
 ---|---|---
 -- | ansible.cfg | Parametrización de Ansible y plugins
